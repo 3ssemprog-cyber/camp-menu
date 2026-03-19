@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المنيو</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a0f07;
+    --brown: #3d2b1f;
+    --brown2: #6b4c38;
+    --gold: #b8893a;
+    --gold2: #d4a85a;
+    --cream: #faf6f0;
+    --text2: rgba(250,246,240,0.55);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--cream); min-height: 100vh; }
+
+  /* HERO */
+  .hero {
+    background: var(--brown);
+    padding: 2.8rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .hero-sub {
+    font-size: 0.8rem;
+    color: var(--gold2);
+    font-weight: 700;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .hero-line {
+    width: 50px;
+    height: 2px;
+    background: var(--gold);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* CATS SCREEN */
+  #cats-screen { display: block; }
+  .cats-inner { max-width: 500px; margin: 0 auto; padding: 1.5rem 1rem 4rem; display: flex; flex-direction: column; gap: 10px; }
+
+  .cat-row {
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    height: 72px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.18s, filter 0.18s;
+    position: relative;
+  }
+  .cat-row:active { transform: scale(0.97); }
+  .cat-row:hover { filter: brightness(1.12); }
+
+  .cat-row-color {
+    width: 6px;
+    height: 100%;
+    flex-shrink: 0;
+  }
+  .cat-row-body {
+    flex: 1;
+    padding: 0 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cat-row-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .cat-row-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cat-row-count {
+    font-size: 0.82rem;
+    color: var(--text2);
+  }
+  .cat-row-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--cream);
+  }
+
+  /* row colors */
+  .rc-1 { background: #2d1b0e; } .rc-1 .cat-row-color { background: #c8623a; }
+  .rc-2 { background: #0e1f2d; } .rc-2 .cat-row-color { background: #3a8ec8; }
+  .rc-3 { background: #1a0e2d; } .rc-3 .cat-row-color { background: #7c3ac8; }
+  .rc-4 { background: #0e2d1a; } .rc-4 .cat-row-color { background: #3ac87c; }
+  .rc-5 { background: #2d2a0e; } .rc-5 .cat-row-color { background: #c8b83a; }
+  .rc-6 { background: #2d0e1a; } .rc-6 .cat-row-color { background: #c83a7c; }
+  .rc-7 { background: #0e2d2a; } .rc-7 .cat-row-color { background: #3ac8c0; }
+  .rc-8 { background: #1a1a1a; } .rc-8 .cat-row-color { background: #888; }
+
+  /* ITEMS SCREEN */
+  #items-screen { display: none; }
+  .items-topbar {
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .back-btn {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: var(--cream);
+    cursor: pointer;
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    font-size: 1.1rem;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.15); }
+  .items-topbar-left { flex: 1; }
+  .items-topbar-title { font-size: 1.1rem; font-weight: 700; color: var(--cream); }
+  .items-topbar-count { font-size: 0.78rem; color: var(--text2); margin-top: 1px; }
+  .items-topbar-accent { width: 3px; height: 38px; border-radius: 3px; flex-shrink: 0; }
+
+  .items-inner { max-width: 500px; margin: 0 auto; padding: 1.2rem 1rem 4rem; }
+  .items-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .item-card { background: var(--brown); border-radius: 16px; overflow: hidden; transition: transform 0.18s; }
+  .item-card:active { transform: scale(0.97); }
+  .item-img-wrap { width: 100%; height: 120px; background: var(--brown2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .item-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .item-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .item-no-img-inner { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+  .item-body { padding: 10px 10px 12px; }
+  .item-name { font-size: 0.9rem; font-weight: 700; color: var(--cream); line-height: 1.3; margin-bottom: 3px; }
+  .item-desc { font-size: 0.75rem; color: var(--text2); line-height: 1.4; margin-bottom: 6px; font-weight: 300; }
+  .item-price-tag { font-size: 0.95rem; font-weight: 700; color: var(--gold2); }
+
+  /* LOADER */
+  .loader { text-align: center; padding: 4rem 1rem; color: var(--text2); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { width: 28px; height: 28px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+
+  .empty { text-align: center; padding: 3rem; color: var(--text2); }
+  .footer { text-align: center; padding: 1.5rem; font-size: 0.78rem; color: rgba(250,246,240,0.3); border-top: 1px solid rgba(255,255,255,0.05); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>CAMP</h1>
+  <div class="hero-sub">GAME ZONE</div>
+  <div class="hero-line"></div>
+</div>
+
+<!-- شاشة التصنيفات -->
+<div id="cats-screen">
+  <div class="cats-inner" id="cats-inner">
+    <div class="loader"><div class="spin"></div>جاري التحميل...</div>
+  </div>
+</div>
+
+<!-- شاشة الأيتم -->
+<div id="items-screen">
+  <div class="items-topbar" id="items-topbar">
+    <div class="items-topbar-accent" id="topbar-accent"></div>
+    <div class="items-topbar-left">
+      <div class="items-topbar-title" id="items-title"></div>
+      <div class="items-topbar-count" id="items-count"></div>
+    </div>
+    <button class="back-btn" id="back-btn">&#8592;</button>
+  </div>
+  <div class="items-inner">
+    <div class="items-grid" id="items-grid"></div>
+  </div>
+</div>
+
+<div class="footer">جميع الأسعار تشمل الضريبة</div>
+
+<script type="module">
+import { db } from './firebase-config.js';
+import { collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const COLORS = [
+  { bg: '#2d1b0e', accent: '#c8623a' },
+  { bg: '#0e1f2d', accent: '#3a8ec8' },
+  { bg: '#1a0e2d', accent: '#7c3ac8' },
+  { bg: '#0e2d1a', accent: '#3ac87c' },
+  { bg: '#2d2a0e', accent: '#c8b83a' },
+  { bg: '#2d0e1a', accent: '#c83a7c' },
+  { bg: '#0e2d2a', accent: '#3ac8c0' },
+  { bg: '#1a1a1a', accent: '#888888' },
+];
+
+let allItems = [];
+let catColorMap = {};
+
+const q = query(collection(db, "menuItems"), orderBy("category"));
+onSnapshot(q, (snap) => {
+  allItems = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(i => i.available !== false);
+  renderCatsScreen();
+});
+
+function renderCatsScreen() {
+  const inner = document.getElementById('cats-inner');
+  const cats = [...new Set(allItems.map(i => i.category).filter(Boolean))];
+
+  if (!cats.length) {
+    inner.innerHTML = '<div class="empty">المنيو فاضي حالياً</div>';
+    return;
+  }
+
+  cats.forEach((cat, idx) => {
+    catColorMap[cat] = COLORS[idx % COLORS.length];
+  });
+
+  inner.innerHTML = cats.map((cat, idx) => {
+    const count = allItems.filter(i => i.category === cat).length;
+    const color = COLORS[idx % COLORS.length];
+    return `
+      <div class="cat-row" style="background:${color.bg}" onclick="openCategory('${cat}')">
+        <div class="cat-row-color" style="background:${color.accent}"></div>
+        <div class="cat-row-body">
+          <span class="cat-row-name">${cat}</span>
+          <div class="cat-row-meta">
+            <span class="cat-row-count">${count} صنف</span>
+            <div class="cat-row-arrow">&#8592;</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+window.openCategory = (cat) => {
+  const items = allItems.filter(i => i.category === cat);
+  const color = catColorMap[cat] || COLORS[0];
+
+  document.getElementById('items-title').textContent = cat;
+  document.getElementById('items-count').textContent = items.length + ' صنف';
+  document.getElementById('topbar-accent').style.background = color.accent;
+  document.getElementById('items-topbar').style.background = color.bg;
+
+  document.getElementById('items-grid').innerHTML = items.map(item => `
+    <div class="item-card" style="background:${color.bg}; border-top: 2px solid ${color.accent}33;">
+      <div class="item-img-wrap">
+        ${item.imageUrl
+          ? `<img src="${item.imageUrl}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="item-no-img" style="display:none"><div class="item-no-img-inner"></div></div>`
+          : `<div class="item-no-img"><div class="item-no-img-inner" style="background:${color.accent}22; border-color:${color.accent}44;"></div></div>`}
+      </div>
+      <div class="item-body">
+        <div class="item-name">${item.name}</div>
+        ${item.description ? `<div class="item-desc">${item.description}</div>` : ''}
+        <div class="item-price-tag" style="color:${color.accent}">${item.price} ج.م</div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('cats-screen').style.display = 'none';
+  document.getElementById('items-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'instant' });
+};
+
+document.getElementById('back-btn').addEventListener('click', () => {
+  document.getElementById('items-screen').style.display = 'none';
+  document.getElementById('cats-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'instant' });
+});
+</script>
+</body>
+</html>
